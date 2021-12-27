@@ -1,4 +1,5 @@
 syntax on
+set encoding=UTF-8
 set guicursor=
 set relativenumber
 set nohlsearch
@@ -56,6 +57,7 @@ Plug 'nvim-treesitter/playground'
 
 Plug 'gruvbox-community/gruvbox'
 Plug 'eddyekofo94/gruvbox-flat.nvim'
+Plug 'navarasu/onedark.nvim'
 
 Plug 'tpope/vim-fugitive'
 
@@ -64,7 +66,10 @@ Plug 'othree/yajs.vim', { 'for': 'javascript' }
 
 Plug 'phpactor/phpactor', {'for': 'php', 'branch': 'master', 'do': 'composer install --no-dev -o'}
 
-Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
+Plug 'nvim-lualine/lualine.nvim'
+" If you want to have icons in your statusline choose one of these
+Plug 'kyazdani42/nvim-web-devicons'
 
 " TODO
 Plug 'vuciv/vim-bujo'
@@ -74,9 +79,15 @@ Plug 'b3nj5m1n/kommentary'
 
 " Conflicts with PHP intellephense autocomplete
 " Plug 'hrsh7th/nvim-compe'
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
 
 "The most awaited VimSpector Debugger
-Plug 'puremourning/vimspector'
+" Plug 'puremourning/vimspector'
 
 " Plug 'codota/tabnine-vim'
 
@@ -95,7 +106,7 @@ call plug#end()
 let g:vimspector_enable_mappings = 'HUMAN'
 
 let g:gruvbox_flat_style = "dark"
-colorscheme gruvbox
+colorscheme onedark
 """ Coloring
 
 " Opaque Background (Comment out to use terminal's profile)
@@ -104,18 +115,24 @@ set termguicolors
 " Transparent Background (For i3 and compton)
 hi Normal guibg=NONE ctermbg=NONE
 
-" set background=dark
+set background=dark
 
 " LSP settings moved to lsp.lua
 lua require('lsp')
 
 lua require('kommentry')
 
-" lua require('complete')
+lua require('lua-cmp')
 
 " lua require('eslint')
 
 " lua require('telescope').load_extension('media_files')
+
+lua << END
+require'lualine'.setup{
+    options = {theme = "onedark"}
+}
+END
 
 " vim-markdown settings
 " disable header folding
@@ -145,8 +162,8 @@ endfun
 " autocommands
 augroup ERGHO
     autocmd!
-    autocmd BufWritePost *.php :lua require'phpcs'.cbf()
-    autocmd BufWritePost,BufReadPost *.php :lua require'phpcs'.cs()
+    " autocmd BufWritePost *.php :lua require'phpcs'.cbf()
+    " autocmd BufWritePost,BufReadPost *.php :lua require'phpcs'.cs()
     autocmd BufWritePre * :call TrimWhiteSpace()
 augroup END
 
