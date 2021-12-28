@@ -172,7 +172,7 @@ autocmd FileType php set iskeyword+=$ noet ci pi sts=0 sw=4 ts=4
 " PHPCS
 " let g:nvim_phpcs_config_phpcs_path = 'phpcs'
 " let g:nvim_phpcs_config_phpcbf_path = 'phpcbf'
-let g:nvim_phpcs_config_phpcs_standard = 'PSR2'
+let g:nvim_phpcs_config_phpcs_standard = 'PSR12'
 
 " Phpactor
 let g:phpactorPhpBin = "/usr/bin/php"
@@ -182,13 +182,13 @@ let g:PHP_removeCRwhenUnix = 1
 
 " Find files using Telescope command-line sugar.
 
-nnoremap <C-f> <cmd>:lua require('telescope.builtin').find_files({previewer = false, show_untracked = false})<cr>
-nnoremap <C-b> <cmd>:lua require('telescope.builtin').buffers({previewer = false})<cr>
-nnoremap <C-p> <cmd>:lua require('telescope.builtin').git_files({previewer=false,recurse_submodules = true, show_untracked = false})<cr>
+nnoremap <C-f> <cmd>:lua require('telescope.builtin').find_files(require'telescope.themes'.get_dropdown({previewer = false, show_untracked = false}))<cr>
+nnoremap <C-b> <cmd>:lua require('telescope.builtin').buffers(require'telescope.themes'.get_dropdown({previewer = false}))<cr>
+nnoremap <C-p> <cmd>:lua require('telescope.builtin').git_files(require'telescope.themes'.get_dropdown({previewer=false,recurse_submodules = true, show_untracked = false}))<cr>
 nnoremap <C-g> <cmd>:lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 " nnoremap <C-b> <cmd>Telescope buffers<cr>
-nnoremap <leader>fb <cmd>Telescope file_browser<cr>
+nnoremap <leader>fb <cmd>Telescope file_browser theme=dropdown previewer=false<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 nnoremap <leader>bn <cmd>bn<cr>

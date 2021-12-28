@@ -47,7 +47,7 @@ do
 end
 
 -- Enable touchpad Tapping
-awful.spawn('xinput set-prop "MSFT0004:00 06CB:CD98 Touchpad" "libinput Tapping Enabled" 1');
+awful.spawn('xinput set-prop "$(xinput list --name-only | grep -i Touchpad)" "libinput Tapping Enabled" 1');
 -- }}}
 
 -- {{{ Variable definitions
