@@ -188,7 +188,8 @@ draw_bold_text_with_bright_colors: false
 
 # Colors (One Dark theme)
 import:
-   - ./onedark.yml
+   # - ./onedark.yml
+   - ./nord.yml
 # Colors (Tomorrow Night)
 #colors:
   # Default colors
