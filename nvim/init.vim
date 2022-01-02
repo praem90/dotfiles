@@ -231,6 +231,10 @@ nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim
 nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 
+" Git keymaps
+nnoremap <leader>gs :Git<CR>
+nnoremap <leader>gp :Git push<CR>
+
 nnoremap <Leader>ex :Ex<CR>
 
 nnoremap <leader>y "+y
