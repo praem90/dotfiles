@@ -21,6 +21,7 @@ set scrolloff=8
 " set noshowmode
 set signcolumn=yes
 set isfname+=@-@
+set cursorline
 " set ls=0
 
 " Give more space for displaying messages.

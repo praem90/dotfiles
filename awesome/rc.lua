@@ -5,6 +5,7 @@ pcall(require, "luarocks.loader")
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
+local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
@@ -46,13 +47,10 @@ do
     end)
 end
 
--- Enable touchpad Tapping
-awful.spawn('xinput set-prop "$(xinput list --name-only | grep -i Touchpad)" "libinput Tapping Enabled" 1');
--- }}}
-
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+-- beautiful.init("/home/praem90/.config/awesome/themes/powerarrow/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
@@ -185,7 +183,13 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
+local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+
 awful.screen.connect_for_each_screen(function(s)
+
+    -- Enable touchpad Tapping
+    awful.spawn('xinput set-prop "$(xinput list --name-only | grep -i Touchpad)" "libinput Tapping Enabled" 1');
+
     -- Wallpaper
     set_wallpaper(s)
 
@@ -231,7 +235,8 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
+            batteryarc_widget(),
+            cpu_widget(),
             wibox.widget.systray(),
             mytextclock,
             s.mylayoutbox,
