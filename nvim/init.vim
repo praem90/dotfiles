@@ -86,6 +86,10 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'hrsh7th/cmp-vsnip'
+
 
 "The most awaited VimSpector Debugger
 " Plug 'puremourning/vimspector'
@@ -257,4 +261,3 @@ inoremap <C-c> <ESC>
 " Insert a new line above or below cursor
 nnoremap <leader>O YPD
 nnoremap <leader>o YpD
-
