@@ -185,10 +185,15 @@ screen.connect_signal("property::geometry", set_wallpaper)
 
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 
-awful.screen.connect_for_each_screen(function(s)
+awesome.connect_signal(
+    'startup',
+    function(args)
+        -- Enable touchpad Tapping
+        awful.spawn.easy_async_with_shell('xinput set-prop "$(xinput list --name-only | grep -i Touchpad)" "libinput Tapping Enabled" 1');
+    end
+)
 
-    -- Enable touchpad Tapping
-    awful.spawn('xinput set-prop "$(xinput list --name-only | grep -i Touchpad)" "libinput Tapping Enabled" 1');
+awful.screen.connect_for_each_screen(function(s)
 
     -- Wallpaper
     set_wallpaper(s)
