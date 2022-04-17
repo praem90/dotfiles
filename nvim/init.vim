@@ -42,10 +42,11 @@ set shortmess+=c
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
 
 call plug#begin('~/.vim/plugged')
-Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/popup.nvim' 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 " Plug 'nvim-telescope/telescope-media-files.nvim'
+Plug 'nvim-telescope/telescope-file-browser.nvim'
 
 Plug 'neovim/nvim-lsp'
 Plug 'neovim/nvim-lspconfig'
@@ -76,7 +77,8 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'vuciv/vim-bujo'
 
 " Code Comment
-Plug 'b3nj5m1n/kommentary'
+Plug 'b3nj5m1n/kommentary' 
+Plug 'tpope/vim-commentary'
 
 " Conflicts with PHP intellephense autocomplete
 " Plug 'hrsh7th/nvim-compe'
@@ -93,7 +95,7 @@ Plug 'hrsh7th/vim-vsnip-integ'
 
 
 "The most awaited VimSpector Debugger
-" Plug 'puremourning/vimspector'
+Plug 'puremourning/vimspector'
 
 " Plug 'codota/tabnine-vim'
 
@@ -106,7 +108,16 @@ Plug 'godlygeek/tabular'
 Plug 'elzr/vim-json'
 Plug 'plasticboy/vim-markdown'
 
+Plug 'phpstan/vim-phpstan'
+
+" Markdown presenter
+Plug 'sotte/presenting.vim'
+
 call plug#end()
+
+au FileType markdown
+let b:presenting_slide_separator = '\v(^|\n)\ze#{1,2}[^#]'
+
 
 " vimspector
 let g:vimspector_enable_mappings = 'HUMAN'
@@ -130,6 +141,9 @@ lua require('kommentry')
 
 lua require('lua-cmp')
 
+" VimSpector keybindings
+lua require('spector')
+
 " lua require('eslint')
 
 " lua require('telescope').load_extension('media_files')
@@ -139,6 +153,9 @@ require'lualine'.setup{
     options = {theme = "onedark"}
 }
 END
+
+lua require("telescope").load_extension "file_browser"
+
 
 " vim-markdown settings
 " disable header folding
@@ -168,8 +185,8 @@ endfun
 " autocommands
 augroup ERGHO
     autocmd!
-    " autocmd BufWritePost *.php :lua require'phpcs'.cbf()
-    " autocmd BufWritePost,BufReadPost *.php :lua require'phpcs'.cs()
+    " autocmd BufWritePre *.php :lua require'phpcs'.cbf()
+    autocmd BufWritePost,BufReadPost *.php :lua require'phpcs'.cs()
     autocmd BufWritePre * :call TrimWhiteSpace()
 augroup END
 
@@ -203,6 +220,7 @@ nnoremap <leader>bp <cmd>bp<cr>
 " TODO
 nmap <C-S> <Plug>BujoAddnormal
 imap <C-S> <Plug>BujoAddinsert
+nmap <leader>t <cmd>Todo g<CR><C-w>H
 
 nmap <leader>s <Plug>BujoChecknormal
 
@@ -214,8 +232,8 @@ nnoremap <C-j> <cmd>cnext<cr>
 nnoremap <C-k> <cmd>cprev<cr>
 
 " LSP lint nav
-nnoremap <leader>j <cmd>:lua vim.lsp.diagnostic.goto_next()<cr>
-nnoremap <leader>k <cmd>:lua vim.lsp.diagnostic.goto_prev()<cr>
+nnoremap <leader>j <cmd>:lua vim.diagnostic.goto_next()<cr>
+nnoremap <leader>k <cmd>:lua vim.diagnostic.goto_prev()<cr>
 
 " LSP Autocomplete
 nnoremap <leader>gd <cmd>lua vim.lsp.buf.definition()<CR>
