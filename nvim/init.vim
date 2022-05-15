@@ -22,6 +22,8 @@ set scrolloff=8
 set signcolumn=yes
 set isfname+=@-@
 set cursorline
+set nocompatible
+filetype plugin on
 " set ls=0
 
 " Give more space for displaying messages.
@@ -42,7 +44,7 @@ set shortmess+=c
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
 
 call plug#begin('~/.vim/plugged')
-Plug 'nvim-lua/popup.nvim' 
+Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 " Plug 'nvim-telescope/telescope-media-files.nvim'
@@ -75,9 +77,11 @@ Plug 'kyazdani42/nvim-web-devicons'
 
 " TODO
 Plug 'vuciv/vim-bujo'
+Plug 'vimwiki/vimwiki'
+
 
 " Code Comment
-Plug 'b3nj5m1n/kommentary' 
+Plug 'b3nj5m1n/kommentary'
 Plug 'tpope/vim-commentary'
 
 " Conflicts with PHP intellephense autocomplete
@@ -221,8 +225,12 @@ nnoremap <leader>bp <cmd>bp<cr>
 nmap <C-S> <Plug>BujoAddnormal
 imap <C-S> <Plug>BujoAddinsert
 nmap <leader>t <cmd>Todo g<CR><C-w>H
-
 nmap <leader>s <Plug>BujoChecknormal
+
+
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
+
 
 let g:bujo#todo_file_path = $HOME . "/.cache/bujo"
 
@@ -282,7 +290,8 @@ nnoremap <leader>O YPD
 nnoremap <leader>o YpD
 
 " Terminal Keymaps
-if has('nvim')
+  nnoremap <leader>T <c-w>v<c-\><c-n><c-w>l:term<CR>i
+
   " Terminal mode:
   tnoremap <Esc> <c-\><c-n>
   tnoremap <M-h> <c-\><c-n><c-w>h
@@ -304,4 +313,3 @@ if has('nvim')
   nnoremap <M-j> <c-w>j
   nnoremap <M-k> <c-w>k
   nnoremap <M-l> <c-w>l
-endif
