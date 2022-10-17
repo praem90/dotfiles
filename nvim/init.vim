@@ -52,8 +52,9 @@ Plug 'nvim-telescope/telescope-file-browser.nvim'
 
 Plug 'neovim/nvim-lsp'
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
+" Plug 'nvim-lua/completion-nvim'
 " Plug 'glepnir/lspsaga.nvim'
+Plug 'simrat39/rust-tools.nvim'
 
 " Neovim Tree shitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -66,6 +67,9 @@ Plug 'navarasu/onedark.nvim'
 Plug 'tpope/vim-fugitive'
 
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'leafgarland/typescript-vim'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
 
 Plug 'phpactor/phpactor', {'for': 'php', 'branch': 'master', 'do': 'composer install --no-dev -o'}
@@ -97,7 +101,6 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 
-
 "The most awaited VimSpector Debugger
 Plug 'puremourning/vimspector'
 
@@ -117,6 +120,7 @@ Plug 'phpstan/vim-phpstan'
 " Markdown presenter
 Plug 'sotte/presenting.vim'
 
+Plug 'mtdl9/vim-log-highlighting'
 call plug#end()
 
 au FileType markdown
@@ -212,8 +216,8 @@ let g:PHP_removeCRwhenUnix = 1
 nnoremap <C-f> <cmd>:lua require('telescope.builtin').find_files(require'telescope.themes'.get_dropdown({previewer = false, show_untracked = false}))<cr>
 nnoremap <C-b> <cmd>:lua require('telescope.builtin').buffers(require'telescope.themes'.get_dropdown({previewer = false}))<cr>
 nnoremap <C-p> <cmd>:lua require('telescope.builtin').git_files(require'telescope.themes'.get_dropdown({previewer=false,recurse_submodules = true, show_untracked = false}))<cr>
-nnoremap <C-g> <cmd>:lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <C-g> <cmd>:lua require('telescope.builtin').live_grep(require'telescope.themes'.get_ivy({previewer = false, show_untracked = false}))<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep theme=ivy<cr>
 " nnoremap <C-b> <cmd>Telescope buffers<cr>
 nnoremap <leader>fb <cmd>Telescope file_browser theme=dropdown previewer=false<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
@@ -255,7 +259,7 @@ nnoremap <leader>g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <leader>gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <leader>R    <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <leader>pf    <cmd>lua vim.lsp.buf.formatting()<CR>
-nnoremap <leader>de    <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+nnoremap <leader>de    <cmd>lua vim.diagnostic.open_float()<CR>
 
 nnoremap <leader>fw yiw/<C-R>"<CR>
 nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
