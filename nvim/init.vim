@@ -47,24 +47,23 @@ call plug#begin('~/.vim/plugged')
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-" Plug 'nvim-telescope/telescope-media-files.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 
 Plug 'neovim/nvim-lsp'
 Plug 'neovim/nvim-lspconfig'
-" Plug 'nvim-lua/completion-nvim'
-" Plug 'glepnir/lspsaga.nvim'
+
+" Rust
 Plug 'simrat39/rust-tools.nvim'
 
 " Neovim Tree shitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 
+" Themes
 Plug 'gruvbox-community/gruvbox'
 Plug 'eddyekofo94/gruvbox-flat.nvim'
 Plug 'navarasu/onedark.nvim'
 
-Plug 'tpope/vim-fugitive'
 
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'leafgarland/typescript-vim'
@@ -84,9 +83,12 @@ Plug 'vuciv/vim-bujo'
 Plug 'vimwiki/vimwiki'
 
 
-" Code Comment
-Plug 'b3nj5m1n/kommentary'
+" tpope
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-ragtag'
+Plug 'tpope/vim-dispatch'
 
 " Conflicts with PHP intellephense autocomplete
 " Plug 'hrsh7th/nvim-compe'
@@ -279,13 +281,6 @@ nnoremap Y yy
 
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
-
-" Auto close brackets
-inoremap " ""<LEFT>
-inoremap ' ''<LEFT>
-inoremap (<CR> ()<LEFT><CR><ESC>O
-inoremap {<CR> {}<LEFT><CR><ESC>O
-inoremap [<CR> []<LEFT><CR><ESC>O
 
 inoremap <C-c> <ESC>
 
