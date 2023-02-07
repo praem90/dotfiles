@@ -17,4 +17,5 @@ require'lspconfig'.phpactor.setup{}
 require'lspconfig'.vimls.setup{}
 require'lspconfig'.html.setup{}
 require'lspconfig'.tsserver.setup{}
+require'lspconfig'.pyright.setup{}
 rt.setup()

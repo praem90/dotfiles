@@ -63,6 +63,7 @@ Plug 'nvim-treesitter/playground'
 Plug 'gruvbox-community/gruvbox'
 Plug 'eddyekofo94/gruvbox-flat.nvim'
 Plug 'navarasu/onedark.nvim'
+Plug 'rmehri01/onenord.nvim', { 'branch': 'main' }
 
 
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
@@ -133,7 +134,7 @@ let b:presenting_slide_separator = '\v(^|\n)\ze#{1,2}[^#]'
 let g:vimspector_enable_mappings = 'HUMAN'
 
 let g:gruvbox_flat_style = "dark"
-colorscheme onedark
+colorscheme onenord
 """ Coloring
 
 " Opaque Background (Comment out to use terminal's profile)
@@ -147,7 +148,7 @@ set background=dark
 " LSP settings moved to lsp.lua
 lua require('lsp')
 
-lua require('kommentry')
+" lua require('kommentry')
 
 lua require('lua-cmp')
 
@@ -160,7 +161,7 @@ lua require('spector')
 
 lua << END
 require'lualine'.setup{
-    options = {theme = "onedark"}
+    options = {theme = "onenord"}
 }
 END
 
@@ -270,7 +271,7 @@ nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 
 " Git keymaps
 nnoremap <leader>gs :Git<CR>
-nnoremap <leader>gp :Git push<CR>
+nnoremap <leader>gp :Dispatch git push<CR>
 
 nnoremap <Leader>ex :Ex<CR>
 
