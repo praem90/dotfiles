@@ -197,7 +197,7 @@ endfun
 augroup ERGHO
     autocmd!
     " autocmd BufWritePre *.php :lua require'phpcs'.cbf()
-    autocmd BufWritePost,BufReadPost *.php :lua require'phpcs'.cs()
+    " autocmd BufWritePost,BufReadPost *.php :lua require'phpcs'.cs()
     autocmd BufWritePre * :call TrimWhiteSpace()
 augroup END
 
