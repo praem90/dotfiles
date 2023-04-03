@@ -204,8 +204,8 @@ augroup END
 autocmd FileType php set iskeyword+=$ noet ci pi sts=0 sw=4 ts=4
 
 " PHPCS
-" let g:nvim_phpcs_config_phpcs_path = 'phpcs'
-" let g:nvim_phpcs_config_phpcbf_path = 'phpcbf'
+let g:nvim_phpcs_config_phpcs_path = 'phpcs'
+let g:nvim_phpcs_config_phpcbf_path = 'phpcbf'
 let g:nvim_phpcs_config_phpcs_standard = 'PSR12'
 
 " Phpactor
