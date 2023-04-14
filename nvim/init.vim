@@ -34,7 +34,7 @@ set cmdheight=1
 set updatetime=50
 set timeoutlen=500
 
-set colorcolumn=80
+set colorcolumn=120
 
 
 let mapleader=" "
