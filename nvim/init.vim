@@ -8,7 +8,7 @@ set noerrorbells
 set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
-set smartindent
+" set smartindent
 set nu
 set nowrap
 set noswapfile
@@ -24,6 +24,7 @@ set isfname+=@-@
 set cursorline
 set nocompatible
 filetype plugin on
+filetype plugin indent on
 " set ls=0
 
 " Give more space for displaying messages.
@@ -57,7 +58,7 @@ Plug 'simrat39/rust-tools.nvim'
 
 " Neovim Tree shitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/playground'
+" Plug 'nvim-treesitter/playground'
 
 " Themes
 Plug 'gruvbox-community/gruvbox'
@@ -93,7 +94,6 @@ Plug 'tpope/vim-dispatch'
 
 " Conflicts with PHP intellephense autocomplete
 " Plug 'hrsh7th/nvim-compe'
-Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
@@ -105,7 +105,10 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 
 "The most awaited VimSpector Debugger
-Plug 'puremourning/vimspector'
+" Plug 'puremourning/vimspector'
+Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
+
 
 " Plug 'codota/tabnine-vim'
 
@@ -131,7 +134,7 @@ let b:presenting_slide_separator = '\v(^|\n)\ze#{1,2}[^#]'
 
 
 " vimspector
-let g:vimspector_enable_mappings = 'HUMAN'
+" let g:vimspector_enable_mappings = 'HUMAN'
 
 let g:gruvbox_flat_style = "dark"
 colorscheme onenord
@@ -153,7 +156,8 @@ lua require('lsp')
 lua require('lua-cmp')
 
 " VimSpector keybindings
-lua require('spector')
+" lua require('spector')
+lua require('debug-dap')
 
 " lua require('eslint')
 
@@ -171,6 +175,9 @@ lua require("telescope").load_extension "file_browser"
 " vim-markdown settings
 " disable header folding
 let g:vim_markdown_folding_disabled = 1
+
+" let g:typescript_indent_disable = 1
+
 
 " do not use conceal feature, the implementation is not so good
 let g:vim_markdown_conceal = 0
