@@ -61,8 +61,8 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Plug 'nvim-treesitter/playground'
 
 " Themes
-Plug 'gruvbox-community/gruvbox'
-Plug 'eddyekofo94/gruvbox-flat.nvim'
+" Plug 'gruvbox-community/gruvbox'
+" Plug 'eddyekofo94/gruvbox-flat.nvim'
 Plug 'navarasu/onedark.nvim'
 Plug 'rmehri01/onenord.nvim', { 'branch': 'main' }
 
@@ -82,7 +82,10 @@ Plug 'kyazdani42/nvim-web-devicons'
 
 " TODO
 Plug 'vuciv/vim-bujo'
-Plug 'vimwiki/vimwiki'
+
+" Markdown presenter
+" Plug 'vimwiki/vimwiki'
+Plug 'sotte/presenting.vim'
 
 
 " tpope
@@ -109,6 +112,12 @@ Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'mfussenegger/nvim-dap'
 Plug 'rcarriga/nvim-dap-ui'
 
+"Test Runner
+Plug 'antoinemadec/FixCursorHold.nvim'
+Plug 'nvim-neotest/neotest'
+Plug 'olimorris/neotest-phpunit'
+Plug 'theutz/neotest-pest'
+
 
 " Plug 'codota/tabnine-vim'
 
@@ -116,17 +125,16 @@ Plug 'rcarriga/nvim-dap-ui'
 " Plug 'praem90/nvim-phpcsf'
 
 " tabular plugin is used to format tables
-Plug 'godlygeek/tabular'
+" Plug 'godlygeek/tabular'
+
 " JSON front matter highlight plugin
 Plug 'elzr/vim-json'
 Plug 'plasticboy/vim-markdown'
 
 Plug 'phpstan/vim-phpstan'
 
-" Markdown presenter
-Plug 'sotte/presenting.vim'
 
-Plug 'mtdl9/vim-log-highlighting'
+" Plug 'mtdl9/vim-log-highlighting'
 call plug#end()
 
 au FileType markdown
@@ -151,17 +159,13 @@ set background=dark
 " LSP settings moved to lsp.lua
 lua require('lsp')
 
-" lua require('kommentry')
-
 lua require('lua-cmp')
 
 " VimSpector keybindings
 " lua require('spector')
 lua require('debug-dap')
 
-" lua require('eslint')
-
-" lua require('telescope').load_extension('media_files')
+lua require('test-runner')
 
 lua << END
 require'lualine'.setup{
@@ -208,12 +212,12 @@ augroup ERGHO
     autocmd BufWritePre * :call TrimWhiteSpace()
 augroup END
 
-autocmd FileType php set iskeyword+=$ noet ci pi sts=0 sw=4 ts=4
+" autocmd FileType php set iskeyword+=$ noet ci pi sts=0 sw=4 ts=4
 
 " PHPCS
-let g:nvim_phpcs_config_phpcs_path = 'phpcs'
-let g:nvim_phpcs_config_phpcbf_path = 'phpcbf'
-let g:nvim_phpcs_config_phpcs_standard = 'PSR12'
+" let g:nvim_phpcs_config_phpcs_path = 'phpcs'
+" let g:nvim_phpcs_config_phpcbf_path = 'phpcbf'
+" let g:nvim_phpcs_config_phpcs_standard = 'PSR12'
 
 " Phpactor
 let g:phpactorPhpBin = "/usr/bin/php"
@@ -224,6 +228,7 @@ let g:PHP_removeCRwhenUnix = 1
 " Find files using Telescope command-line sugar.
 
 nnoremap <C-f> <cmd>:lua require('telescope.builtin').find_files(require'telescope.themes'.get_dropdown({previewer = false, show_untracked = false}))<cr>
+nnoremap <C-F> <cmd>:lua require('telescope.builtin').find_files(require'telescope.themes'.get_dropdown({previewer = false, show_untracked = true, no_ignore=true}))<cr>
 nnoremap <C-b> <cmd>:lua require('telescope.builtin').buffers(require'telescope.themes'.get_dropdown({previewer = false}))<cr>
 nnoremap <C-p> <cmd>:lua require('telescope.builtin').git_files(require'telescope.themes'.get_dropdown({previewer=false,recurse_submodules = true, show_untracked = false}))<cr>
 nnoremap <C-g> <cmd>:lua require('telescope.builtin').live_grep(require'telescope.themes'.get_ivy({previewer = false, show_untracked = false}))<cr>
@@ -283,9 +288,9 @@ nnoremap <leader>gp :Dispatch git push<CR>
 nnoremap <Leader>ex :Ex<CR>
 
 nnoremap <leader>y "+y
+nnoremap Y yy
 vnoremap <leader>y "+y
 nnoremap <leader>Y gg"+yG
-nnoremap Y yy
 
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
@@ -293,8 +298,8 @@ vnoremap K :m '<-2<CR>gv=gv
 inoremap <C-c> <ESC>
 
 " Insert a new line above or below cursor
-nnoremap <leader>O YPD
-nnoremap <leader>o YpD
+nnoremap <leader>O ko<ESC>
+nnoremap <leader>o o<ESC>
 
 " Terminal Keymaps
   nnoremap <leader>T <c-w>v<c-\><c-n><c-w>l:term<CR>i
