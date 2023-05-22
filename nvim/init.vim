@@ -24,7 +24,7 @@ set isfname+=@-@
 set cursorline
 set nocompatible
 filetype plugin on
-filetype plugin indent on
+" filetype plugin indent on
 " set ls=0
 
 " Give more space for displaying messages.
@@ -103,9 +103,9 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
+" Plug 'hrsh7th/cmp-vsnip'
+" Plug 'hrsh7th/vim-vsnip'
+" Plug 'hrsh7th/vim-vsnip-integ
 
 "The most awaited VimSpector Debugger
 " Plug 'puremourning/vimspector'
@@ -115,7 +115,6 @@ Plug 'rcarriga/nvim-dap-ui'
 "Test Runner
 Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'nvim-neotest/neotest'
-Plug 'olimorris/neotest-phpunit'
 Plug 'theutz/neotest-pest'
 
 
@@ -128,7 +127,7 @@ Plug 'theutz/neotest-pest'
 " Plug 'godlygeek/tabular'
 
 " JSON front matter highlight plugin
-Plug 'elzr/vim-json'
+" Plug 'elzr/vim-json'
 Plug 'plasticboy/vim-markdown'
 
 Plug 'phpstan/vim-phpstan'
@@ -137,14 +136,9 @@ Plug 'phpstan/vim-phpstan'
 " Plug 'mtdl9/vim-log-highlighting'
 call plug#end()
 
-au FileType markdown
 let b:presenting_slide_separator = '\v(^|\n)\ze#{1,2}[^#]'
 
 
-" vimspector
-" let g:vimspector_enable_mappings = 'HUMAN'
-
-let g:gruvbox_flat_style = "dark"
 colorscheme onenord
 """ Coloring
 
@@ -215,9 +209,9 @@ augroup END
 " autocmd FileType php set iskeyword+=$ noet ci pi sts=0 sw=4 ts=4
 
 " PHPCS
-" let g:nvim_phpcs_config_phpcs_path = 'phpcs'
-" let g:nvim_phpcs_config_phpcbf_path = 'phpcbf'
-" let g:nvim_phpcs_config_phpcs_standard = 'PSR12'
+let g:nvim_phpcs_config_phpcs_path = 'phpcs'
+let g:nvim_phpcs_config_phpcbf_path = 'phpcbf'
+let g:nvim_phpcs_config_phpcs_standard = 'PSR12'
 
 " Phpactor
 let g:phpactorPhpBin = "/usr/bin/php"
