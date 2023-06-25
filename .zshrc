@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -100,5 +100,31 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export PATH=$PATH:/home/praem90/go/bin/
+export PATH=$PATH:$HOME/.cargo/bin:$HOME/.config/composer/vendor/bin:/home/praem90/go/bin/
+export XDG_CONFIG_HOME=$HOME/.config
+
+
+# Load Angular CLI autocompletion.
+#compdef ng
+###-begin-ng-completions-###
+#
+# yargs command completion script
+#
+# Installation: ng completion >> ~/.zshrc
+#    or ng completion >> ~/.zprofile on OSX.
+#
+_ng_yargs_completions()
+{
+  local reply
+  local si=$IFS
+  IFS=$'
+' reply=($(COMP_CWORD="$((CURRENT-1))" COMP_LINE="$BUFFER" COMP_POINT="$CURSOR" ng --get-yargs-completions "${words[@]}"))
+  IFS=$si
+  _describe 'values' reply
+}
+compdef _ng_yargs_completions ng
+###-end-ng-completions-###
+
+bindkey '^ ' autosuggest-accept
+bindkey '^l' autosuggest-accept
 
