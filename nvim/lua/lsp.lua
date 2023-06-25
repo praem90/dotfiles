@@ -18,4 +18,7 @@ require'lspconfig'.tsserver.setup{}
 require'lspconfig'.pyright.setup{}
 require("rust-tools").setup()
 require'lspconfig'.angularls.setup{}
+require'lspconfig'.gopls.setup{
+    cmd = {"/home/mraj/go/bin/gopls", "serve"},
+}
 

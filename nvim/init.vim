@@ -103,14 +103,15 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 
-" Plug 'hrsh7th/cmp-vsnip'
-" Plug 'hrsh7th/vim-vsnip'
-" Plug 'hrsh7th/vim-vsnip-integ
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
 
 "The most awaited VimSpector Debugger
 " Plug 'puremourning/vimspector'
 Plug 'mfussenegger/nvim-dap'
 Plug 'rcarriga/nvim-dap-ui'
+Plug 'mxsdev/nvim-dap-vscode-js'
 
 "Test Runner
 Plug 'antoinemadec/FixCursorHold.nvim'
@@ -227,6 +228,7 @@ nnoremap <C-b> <cmd>:lua require('telescope.builtin').buffers(require'telescope.
 nnoremap <C-p> <cmd>:lua require('telescope.builtin').git_files(require'telescope.themes'.get_dropdown({previewer=false,recurse_submodules = true, show_untracked = false}))<cr>
 nnoremap <C-g> <cmd>:lua require('telescope.builtin').live_grep(require'telescope.themes'.get_ivy({previewer = false, show_untracked = false}))<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep theme=ivy<cr>
+nnoremap <leader>gb <cmd>:lua require('telescope.builtin').git_branches(require'telescope.themes'.get_dropdown({previewer=false,recurse_submodules = true, show_untracked = false}))<cr>
 " nnoremap <C-b> <cmd>Telescope buffers<cr>
 nnoremap <leader>fb <cmd>Telescope file_browser theme=dropdown previewer=false<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
