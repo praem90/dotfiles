@@ -139,12 +139,11 @@ call plug#end()
 
 let b:presenting_slide_separator = '\v(^|\n)\ze#{1,2}[^#]'
 
+" Opaque Background (Comment out to use terminal's profile)
+set termguicolors
 
 colorscheme onenord
 """ Coloring
-
-" Opaque Background (Comment out to use terminal's profile)
-set termguicolors
 
 " Transparent Background (For i3 and compton)
 hi Normal guibg=NONE ctermbg=NONE
