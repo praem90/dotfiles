@@ -37,11 +37,11 @@ foreground = ${colors.foreground}
 
 line-size = 3pt
 
-border-size = 2pt
+border-size = 4pt
 border-color = #00000000
 
 padding-left = 0
-padding-right = 1
+padding-right = 2
 
 module-margin = 1
 
@@ -51,7 +51,7 @@ separator-foreground = ${colors.disabled}
 font-0 = JetBrains Mono Nerd Font:pixelsize=10;2
 
 modules-left = xworkspaces xwindow
-modules-right = pulseaudio memory cpu wlan date launcher powermenu battery batteries
+modules-right = eth pulseaudio-control-output pulseaudio-control-input memory cpu wlan date launcher powermenu battery batteries
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -229,20 +229,23 @@ time-format = %H:%M
 ;   <bar-capacity>
 ;   <ramp-capacity>
 ;   <animation-charging>
-format-charging = <animation-charging> %{} <label-charging>
+format-charging = <animation-charging>
+format-charging-foreground = ${colors.secondary}
 
 ; Available tags:
 ;   <label-discharging> (default)
 ;   <bar-capacity>
 ;   <ramp-capacity>
 ;   <animation-discharging>
-format-discharging = <ramp-capacity> <label-discharging>
+format-discharging = <ramp-capacity>
+format-discharging-foreground = ${colors.foreground}
 
 ; Available tags:
 ;   <label-full> (default)
 ;   <bar-capacity>
 ;   <ramp-capacity>
-format-full = <ramp-capacity> <label-full>
+format-full = <ramp-capacity>
+format-full-foreground = ${colors.secondary}
 
 ; Format used when battery level drops to low-at
 ; If not defined, format-discharging is used instead.
@@ -287,6 +290,7 @@ ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
+ramp-capacity-0-foreground = ${colors.alert}
 
 ; Only applies if <bar-capacity> is used
 bar-capacity-width = 10
@@ -314,3 +318,36 @@ animation-discharging-framerate = 500
 animation-low-0 = !
 animation-low-1 =
 animation-low-framerate = 200
+
+[module/pulseaudio-control-output]
+type = custom/script
+tail = true
+format-underline = ${colors.cyan}
+label-padding = 2
+label-foreground = ${colors.foreground}
+
+# Icons mixed from Font Awesome 5 and Material Icons
+# You can copy-paste your options for each possible action, which is more
+# trouble-free but repetitive, or apply only the relevant ones (for example
+# --node-blacklist is only needed for next-node).
+exec = pulseaudio-control --icons-volume " , " --icon-muted " " --node-nicknames-from "device.description" --node-nickname "alsa_output.pci-0000_00_1b.0.analog-stereo:  Speakers" --node-nickname "bluez_sink.76_E9_D5_D1_74_9F.a2dp_sink:  Headphones" listen
+click-right = exec pavucontrol &
+click-left = pulseaudio-control togmute
+click-middle = pulseaudio-control --node-blacklist "alsa_output.pci-0000_01_00.1.hdmi-stereo-extra2" next-node
+scroll-up = pulseaudio-control --volume-max 130 up
+scroll-down = pulseaudio-control --volume-max 130 down
+
+[module/pulseaudio-control-input]
+type = custom/script
+tail = true
+format-underline = ${colors.cyan}
+label-padding = 2
+label-foreground = ${colors.foreground}
+
+# Use --node-blacklist to remove the unwanted PulseAudio .monitor that are child of sinks
+exec = pulseaudio-control  --node-type input --icons-volume "" --icon-muted "" --node-nickname "alsa_output.pci-0000_00_1f.3.analog-stereo:  Webcam" --node-nickname "bluez_sink.76_E9_D5_D1_74_9F.a2dp_sink:  Headphones" --node-blacklist "*.monitor" listen
+click-right = exec pavucontrol &
+click-left = pulseaudio-control --node-type input togmute
+click-middle = pulseaudio-control --node-type input next-node
+scroll-up = pulseaudio-control --node-type input --volume-max 130 up
+scroll-down = pulseaudio-control --node-type input --volume-max 130 down

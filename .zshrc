@@ -134,7 +134,14 @@ compdef _ng_yargs_completions ng
 bindkey '^ ' autosuggest-accept
 bindkey '^l' autosuggest-accept
 
-
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# kubernetes
+source <(kubectl completion zsh)
+export GOPATH="$HOME/go"
+export PATH="/home/praem90/projects/k8s/kubernetes/third_party/etcd:${PATH}"
+export PATH="${GOPATH}:${PATH}"
+# export CONTAINER_RUNTIME_ENDPOINT="unix:///run/containerd/containerd.sock"
+# export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
