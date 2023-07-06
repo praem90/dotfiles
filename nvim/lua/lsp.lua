@@ -18,7 +18,14 @@ require'lspconfig'.tsserver.setup{}
 require'lspconfig'.pyright.setup{}
 require("rust-tools").setup()
 require'lspconfig'.angularls.setup{}
+
 require'lspconfig'.gopls.setup{
-    cmd = {"/home/mraj/go/bin/gopls", "serve"},
+    cmd = {"gopls", "serve"},
 }
+vim.api.nvim_create_autocmd('BufWritePre', {
+  pattern = '*.go',
+  callback = function()
+    vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
+  end
+})
 
