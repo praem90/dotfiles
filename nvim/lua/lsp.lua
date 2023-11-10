@@ -6,22 +6,26 @@
     -- on_attach=require'completion'.on_attach
 } ]]
 
-require'lspconfig'.intelephense.setup{}
-require'lspconfig'.phpactor.setup{}
+-- require'lspconfig'.intelephense.setup{}
+
+require'lspconfig'.phpactor.setup{
+    capabilities = require('cmp_nvim_lsp').default_capabilities()
+}
 require'lspconfig'.vimls.setup{}
 require'lspconfig'.html.setup{}
-require'lspconfig'.sqlls.setup{
-	root_dir = require'lspconfig'.util.find_git_ancestor,
-	single_file_support=true
-}
+-- require'lspconfig'.sqlls.setup{
+-- 	root_dir = require'lspconfig'.util.find_git_ancestor,
+-- 	single_file_support=true
+-- }
 require'lspconfig'.tsserver.setup{}
-require'lspconfig'.pyright.setup{}
+-- require'lspconfig'.pyright.setup{}
 require("rust-tools").setup()
 require'lspconfig'.angularls.setup{}
 
-require'lspconfig'.gopls.setup{
-    cmd = {"gopls", "serve"},
-}
+require'lspconfig'.gopls.setup{}
+
+require'lspconfig'.clangd.setup{}
+
 vim.api.nvim_create_autocmd('BufWritePre', {
   pattern = '*.go',
   callback = function()

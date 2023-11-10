@@ -61,8 +61,8 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Plug 'nvim-treesitter/playground'
 
 " Themes
-" Plug 'gruvbox-community/gruvbox'
-" Plug 'eddyekofo94/gruvbox-flat.nvim'
+Plug 'gruvbox-community/gruvbox'
+Plug 'eddyekofo94/gruvbox-flat.nvim'
 Plug 'navarasu/onedark.nvim'
 Plug 'rmehri01/onenord.nvim', { 'branch': 'main' }
 
@@ -117,7 +117,10 @@ Plug 'mxsdev/nvim-dap-vscode-js'
 Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'nvim-neotest/neotest'
 Plug 'theutz/neotest-pest'
+Plug 'olimorris/neotest-phpunit'
+Plug 'nvim-neotest/neotest-go'
 
+Plug 'aspeddro/slides.nvim'
 
 " Plug 'codota/tabnine-vim'
 
@@ -133,6 +136,7 @@ Plug 'plasticboy/vim-markdown'
 
 Plug 'phpstan/vim-phpstan'
 
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 " Plug 'mtdl9/vim-log-highlighting'
 call plug#end()
@@ -142,7 +146,7 @@ let b:presenting_slide_separator = '\v(^|\n)\ze#{1,2}[^#]'
 " Opaque Background (Comment out to use terminal's profile)
 set termguicolors
 
-colorscheme onenord
+colorscheme onedark
 """ Coloring
 
 " Transparent Background (For i3 and compton)
@@ -166,6 +170,12 @@ require'lualine'.setup{
     options = {theme = "onenord"}
 }
 END
+
+lua << Slides
+require'slides'.setup{
+    fullscreen = true
+}
+Slides
 
 lua require("telescope").load_extension "file_browser"
 
@@ -204,6 +214,7 @@ augroup ERGHO
     " autocmd BufWritePre *.php :lua require'phpcs'.cbf()
     " autocmd BufWritePost,BufReadPost *.php :lua require'phpcs'.cs()
     autocmd BufWritePre * :call TrimWhiteSpace()
+    autocmd BufEnter github.com_*.txt :set filetype=markdown
 augroup END
 
 " autocmd FileType php set iskeyword+=$ noet ci pi sts=0 sw=4 ts=4
@@ -214,7 +225,7 @@ let g:nvim_phpcs_config_phpcbf_path = 'phpcbf'
 let g:nvim_phpcs_config_phpcs_standard = 'PSR12'
 
 " Phpactor
-let g:phpactorPhpBin = "/usr/bin/php"
+" let g:phpactorPhpBin = "/usr/bin/php"
 let g:PHP_removeCRwhenUnix = 1
 
 
