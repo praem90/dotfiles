@@ -236,7 +236,7 @@ nnoremap <C-f> <cmd>:lua require('telescope.builtin').find_files(require'telesco
 nnoremap <C-F> <cmd>:lua require('telescope.builtin').find_files(require'telescope.themes'.get_dropdown({previewer = false, show_untracked = true, no_ignore=true}))<cr>
 nnoremap <C-b> <cmd>:lua require('telescope.builtin').buffers(require'telescope.themes'.get_dropdown({previewer = false}))<cr>
 nnoremap <C-p> <cmd>:lua require('telescope.builtin').git_files(require'telescope.themes'.get_dropdown({previewer=false,recurse_submodules = true, show_untracked = false}))<cr>
-nnoremap <C-g> <cmd>:lua require('telescope.builtin').live_grep(require'telescope.themes'.get_ivy({previewer = false, show_untracked = false}))<cr>
+nnoremap <C-g> <cmd>:lua require('telescope.builtin').live_grep(require'telescope.themes'.get_ivy({previewer = false, show_untracked = false, use_regex = true}))<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep theme=ivy<cr>
 nnoremap <leader>gb <cmd>:lua require('telescope.builtin').git_branches(require'telescope.themes'.get_dropdown({previewer=false,recurse_submodules = true, show_untracked = false}))<cr>
 " nnoremap <C-b> <cmd>Telescope buffers<cr>
