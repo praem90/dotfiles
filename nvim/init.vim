@@ -133,6 +133,8 @@ Plug 'plasticboy/vim-markdown'
 
 Plug 'phpstan/vim-phpstan'
 
+Plug 'nomnivore/ollama.nvim'
+
 
 " Plug 'mtdl9/vim-log-highlighting'
 call plug#end()
@@ -168,6 +170,8 @@ require'lualine'.setup{
 END
 
 lua require("telescope").load_extension "file_browser"
+
+lua require("ollama").setup({model = "codellama:7b"})
 
 
 " vim-markdown settings
