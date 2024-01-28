@@ -88,11 +88,11 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='mvim'
+fi
 
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
@@ -116,11 +116,12 @@ export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# kubernetes
-source <(kubectl completion zsh)
 export GOPATH="$HOME/go"
-export PATH="/home/praem90/projects/k8s/kubernetes/third_party/etcd:${PATH}"
 export PATH="${GOPATH}:${PATH}"
+#
+# kubernetes
+# source <(kubectl completion zsh)
+# export PATH="/home/praem90/projects/k8s/kubernetes/third_party/etcd:${PATH}"
 # export CONTAINER_RUNTIME_ENDPOINT="unix:///run/containerd/containerd.sock"
 # export KUBECONFIG=/var/run/kubernetes/admin.kubeconfig
 
