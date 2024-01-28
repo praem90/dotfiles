@@ -1,4 +1,4 @@
-olors:
+colors:
   # Default colors
   primary:
     background: '0x1e2127'
@@ -16,9 +16,9 @@ olors:
   #
   # Colors which should be used to draw the terminal cursor. If these are unset,
   # the cursor color will be the inverse of the cell color.
-  #cursor:
-  #  text: '0x000000'
-  #  cursor: '0xffffff'
+  cursor:
+    text: '0x000000'
+    cursor: '0xffffff'
 
   # Normal colors
   normal:

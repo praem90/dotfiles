@@ -78,6 +78,7 @@ plugins=(
     archlinux
 )
 
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -91,7 +92,7 @@ export LANG=en_US.UTF-8
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='mvim'
+  export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -106,7 +107,6 @@ export ARCHFLAGS="-arch x86_64"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export PATH=$PATH:$HOME/.cargo/bin:$HOME/.config/composer/vendor/bin:/home/praem90/go/bin/
 export XDG_CONFIG_HOME=$HOME/.config
 
 bindkey '^ ' autosuggest-accept
@@ -115,9 +115,6 @@ bindkey '^l' autosuggest-accept
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export GOPATH="$HOME/go"
-export PATH="${GOPATH}:${PATH}"
 #
 # kubernetes
 # source <(kubectl completion zsh)
@@ -127,3 +124,18 @@ export PATH="${GOPATH}:${PATH}"
 
 
 export BROWSER="/usr/bin/brave"
+
+export ANDROID_HOME=/home/praem90/Android/Sdk
+export CHROME_EXECUTABLE=/bin/google-chrome-stable
+
+export PATH=$PATH:/home/praem90/devbin/flutter/bin
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME:/platform-tools
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+export PATH=$PATH:/home/praem90/devbin/flutter/bin
+
+export PATH=$PATH:$HOME/.config/composer/vendor/bin
+export PATH=$PATH:$HOME/.cargo/bin
+
+export GOPATH="$HOME/go"
+export PATH="${GOPATH}:${PATH}"
+
