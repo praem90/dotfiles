@@ -137,5 +137,5 @@ export PATH=$PATH:$HOME/.config/composer/vendor/bin
 export PATH=$PATH:$HOME/.cargo/bin
 
 export GOPATH="$HOME/go"
-export PATH="${GOPATH}:${PATH}"
+export PATH="${GOPATH}/bin:${PATH}"
 
