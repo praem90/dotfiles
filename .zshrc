@@ -139,3 +139,5 @@ export PATH=$PATH:$HOME/.cargo/bin
 export GOPATH="$HOME/go"
 export PATH="${GOPATH}/bin:${PATH}"
 
+alias get_esprs='. $HOME/export-esp.sh'
+alias get_idf='. $HOME/esp/esp-idf/export.sh'

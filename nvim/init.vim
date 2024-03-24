@@ -55,6 +55,7 @@ Plug 'neovim/nvim-lspconfig'
 
 " Rust
 Plug 'simrat39/rust-tools.nvim'
+" Plug 'mrcjkb/rustaceanvim'
 
 " Neovim Tree shitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}

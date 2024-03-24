@@ -61,7 +61,7 @@ battery all {
         # status_full = ""
         status_full = "☻"
         low_threshold = 15
-        threshold_type = time
+        threshold_type = percentage
 }
 
 memory {
@@ -72,5 +72,5 @@ memory {
 
 tztime local {
         # format = "%Y-%m-%d %H:%M:%S"
-        format = " %d.%m. %H:%M "
+        format = " %d.%m %H:%M "
 }
