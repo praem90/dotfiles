@@ -117,6 +117,7 @@ Plug 'mxsdev/nvim-dap-vscode-js'
 "Test Runner
 Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'nvim-neotest/neotest'
+Plug 'nvim-neotest/neotest-go'
 Plug 'theutz/neotest-pest'
 
 

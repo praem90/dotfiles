@@ -30,8 +30,11 @@ require'lspconfig'.lua_ls.setup {
   }
 }
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- require'lspconfig'.intelephense.setup{}
-require'lspconfig'.phpactor.setup{}
+require'lspconfig'.phpactor.setup{
+    capabilities = capabilities
+}
 require'lspconfig'.vimls.setup{}
 require'lspconfig'.html.setup{}
 require'lspconfig'.sqlls.setup{
