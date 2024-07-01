@@ -112,15 +112,21 @@ Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'mfussenegger/nvim-dap'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'mxsdev/nvim-dap-vscode-js'
+Plug 'theHamsta/nvim-dap-virtual-text'
+
 
 "Test Runner
 Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'nvim-neotest/neotest'
+Plug 'nvim-neotest/nvim-nio'
 Plug 'theutz/neotest-pest'
 Plug 'olimorris/neotest-phpunit'
 Plug 'nvim-neotest/neotest-go'
+Plug 'praem90/neotest-docker-phpunit.nvim'
 
 Plug 'aspeddro/slides.nvim'
+
+Plug 'folke/neodev.nvim'
 
 " Plug 'codota/tabnine-vim'
 
@@ -137,6 +143,8 @@ Plug 'plasticboy/vim-markdown'
 Plug 'phpstan/vim-phpstan'
 
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+
+Plug 'nomnivore/ollama.nvim'
 
 " Plug 'mtdl9/vim-log-highlighting'
 call plug#end()
@@ -165,6 +173,8 @@ lua require('debug-dap')
 
 lua require('test-runner')
 
+lua require('ollama').setup({ model = "codellama:7b" })
+
 lua << END
 require'lualine'.setup{
     options = {theme = "onenord"}
@@ -180,27 +190,6 @@ Slides
 lua require("telescope").load_extension "file_browser"
 
 
-" vim-markdown settings
-" disable header folding
-let g:vim_markdown_folding_disabled = 1
-
-" let g:typescript_indent_disable = 1
-
-
-" do not use conceal feature, the implementation is not so good
-let g:vim_markdown_conceal = 0
-
-" disable math tex conceal feature
-let g:tex_conceal = ""
-let g:vim_markdown_math = 1
-
-" support front matter of various format
-let g:vim_markdown_frontmatter = 1  " for YAML format
-let g:vim_markdown_toml_frontmatter = 1  " for TOML format
-let g:vim_markdown_json_frontmatter = 1  " for JSON format
-
-
-
 "functions for autocommands
 fun! TrimWhiteSpace()
     let l:save = winsaveview()
@@ -211,21 +200,14 @@ endfun
 " autocommands
 augroup ERGHO
     autocmd!
-    " autocmd BufWritePre *.php :lua require'phpcs'.cbf()
-    " autocmd BufWritePost,BufReadPost *.php :lua require'phpcs'.cs()
+    autocmd BufWritePost *.php :lua require'phpcs'.cbf()
+    autocmd BufWritePost,BufReadPost,DiffUpdated,InsertLeave *.php :lua require'phpcs'.cs()
     autocmd BufWritePre * :call TrimWhiteSpace()
     autocmd BufEnter github.com_*.txt :set filetype=markdown
 augroup END
 
 " autocmd FileType php set iskeyword+=$ noet ci pi sts=0 sw=4 ts=4
 
-" PHPCS
-let g:nvim_phpcs_config_phpcs_path = 'phpcs'
-let g:nvim_phpcs_config_phpcbf_path = 'phpcbf'
-let g:nvim_phpcs_config_phpcs_standard = 'PSR12'
-
-" Phpactor
-" let g:phpactorPhpBin = "/usr/bin/php"
 let g:PHP_removeCRwhenUnix = 1
 
 
@@ -242,6 +224,7 @@ nnoremap <leader>gb <cmd>:lua require('telescope.builtin').git_branches(require'
 " nnoremap <C-b> <cmd>Telescope buffers<cr>
 nnoremap <leader>fb <cmd>Telescope file_browser theme=dropdown previewer=false<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>sa <cmd>:lua require'finder'.searchAll()<cr>
 
 nnoremap <leader>bn <cmd>bn<cr>
 nnoremap <leader>bp <cmd>bp<cr>
