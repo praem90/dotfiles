@@ -23,6 +23,7 @@ set signcolumn=yes
 set isfname+=@-@
 set cursorline
 set nocompatible
+set conceallevel=2
 filetype plugin on
 " filetype plugin indent on
 " set ls=0
@@ -85,7 +86,7 @@ Plug 'vuciv/vim-bujo'
 
 " Markdown presenter
 " Plug 'vimwiki/vimwiki'
-Plug 'sotte/presenting.vim'
+Plug 'sotte/presenting.nvim'
 
 
 " tpope
@@ -149,8 +150,6 @@ Plug 'nomnivore/ollama.nvim'
 " Plug 'mtdl9/vim-log-highlighting'
 call plug#end()
 
-let b:presenting_slide_separator = '\v(^|\n)\ze#{1,2}[^#]'
-
 " Opaque Background (Comment out to use terminal's profile)
 set termguicolors
 
@@ -166,6 +165,9 @@ set background=dark
 lua require('lsp')
 
 lua require('lua-cmp')
+
+" presenting.nvim
+lua require('presenting').setup({options = {width = 100}})
 
 " VimSpector keybindings
 " lua require('spector')
@@ -223,6 +225,8 @@ nnoremap <leader>fg <cmd>Telescope live_grep theme=ivy<cr>
 nnoremap <leader>gb <cmd>:lua require('telescope.builtin').git_branches(require'telescope.themes'.get_dropdown({previewer=false,recurse_submodules = true, show_untracked = false}))<cr>
 " nnoremap <C-b> <cmd>Telescope buffers<cr>
 nnoremap <leader>fb <cmd>Telescope file_browser theme=dropdown previewer=false<cr>
+nnoremap <leader>ds <cmd>Telescope lsp_document_symbols<cr>
+nnoremap <leader>ws <cmd>Telescope lsp_workspace_symbols<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>sa <cmd>:lua require'finder'.searchAll()<cr>
 
@@ -238,6 +242,7 @@ nmap <leader>s <Plug>BujoChecknormal
 
 let g:vimwiki_list = [{'path': '~/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
+let g:vim_markdown_folding_disabled = 1
 
 
 let g:bujo#todo_file_path = $HOME . "/.cache/bujo"
@@ -268,6 +273,7 @@ nnoremap <leader>de    <cmd>lua vim.diagnostic.open_float()<CR>
 nnoremap <leader>fw yiw/<C-R>"<CR>
 nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
 nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
+nnoremap <leader>nt :lua require('neotest').run.run()<CR>
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 
 " Git keymaps
