@@ -13,22 +13,26 @@ local M = {}
 M.searchAll = function ()
     local filetype_win_id = popup.create("", {
         border = true,
+        padding = {0, 0, 0, 0},
         borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-        col = 24,
+        col = 22,
         enter = true,
         height = 1,
         line = 7,
-        title = "File Type",
-        width = 96,
-        hightlight = "TelescopePromptNormal",
+        title = "Glob Pattern",
+        width = 76,
+        cursorline = false,
+        hightlight = nil,
         borderhighlight = "TelescopePromptBorder",
         titlehighlight = "TelescopePromptTitle",
     });
 
     local filetype_bufnr = vim.api.nvim_win_get_buf(filetype_win_id)
     vim.api.nvim_buf_set_option(filetype_bufnr, "buftype", "prompt")
-    vim.api.nvim_buf_set_option(filetype_bufnr, "filetype", "TelescopePrompt")
-    local filetype_prefix = vim.fn.prompt_getprompt(filetype_bufnr)
+    vim.api.nvim_buf_set_option(filetype_bufnr, "filetype", "TelescopePromptNormal")
+    vim.api.nvim_win_set_option(filetype_win_id, "cursorline", false)
+    local filetype_prefix = "> "
+    vim.fn.prompt_setprompt(filetype_bufnr, filetype_prefix)
     local file_type = ""
     vim.api.nvim_buf_set_lines(filetype_bufnr, 0, -1, false, {filetype_prefix})
     vim.api.nvim_win_set_cursor(filetype_win_id, {1, #filetype_prefix + 1})
@@ -42,20 +46,24 @@ M.searchAll = function ()
 
     builtins.find_files({
         finder = finders.new_job(function(prompt)
-            local command = { "rg", "--files", "--color", "never", "--no-ignore"}
+            if not prompt or prompt == "" then
+                return nil
+            end
+            local command = { "rg", "--color", "never", "--vimgrep"}
             if file_type ~= "" and file_type ~= nil then
-                table.insert(command, "--type")
+                table.insert(command, "--glob")
                 table.insert(command, file_type)
             end
-            vim.print(vim.inspect(command))
-            return command
-        end, make_entry.gen_from_file(), nil, vim.loop.cwd()),
+            table.insert(command, prompt)
+            print(vim.inspect(command))
+            return vim.tbl_flatten(command)
+        end, make_entry.gen_from_vimgrep(), nil, vim.loop.cwd()),
         get_window_options = function(picker, max_columns, max_lines)
             local layout_opts = p_window.get_window_options(picker, max_columns, max_lines)
-            layout_opts.results.height = 28
-
-            layout_opts.prompt.line = 4
+            layout_opts.results.height = layout_opts.results.height - 3
             layout_opts.results.line = 10
+            layout_opts.prompt.line = 4
+
             return layout_opts
         end,
         attach_mappings = function(_, map)
@@ -69,6 +77,10 @@ M.searchAll = function ()
             map("n", "<ESC>", picker_close)
             map("i", "<TAB>", function()
                 vim.api.nvim_set_current_win(filetype_win_id)
+                vim.api.nvim_set_current_buf(filetype_bufnr)
+                local mode = vim.fn.mode()
+                local keys = mode ~= "n" and "<ESC>A" or "A"
+                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, false, true), "ni", true)
             end)
 
             return true
@@ -90,6 +102,15 @@ M.searchAll = function ()
 
     vim.api.nvim_buf_set_keymap(filetype_bufnr, "i", "<TAB>", "<cmd>lua vim.api.nvim_set_current_win(".. prompt_status.prompt_win .. ")<CR>", {})
     vim.api.nvim_buf_set_keymap(filetype_bufnr, "n", "<TAB>", "<cmd>lua vim.api.nvim_set_current_win(".. prompt_status.prompt_win .. ")<CR>", {})
+
+    -- vim.api.nvim_create_autocmd({"WinEnter"}, {
+    --     buffer = filetype_bufnr,
+    --     callback = function ()
+    --         local mode = vim.fn.mode()
+    --         local keys = mode ~= "n" and "<ESC>A" or "A"
+    --         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, false, true), "ni", true)
+    --     end
+    -- });
 end
 
 return M
