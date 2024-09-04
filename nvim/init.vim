@@ -59,7 +59,7 @@ Plug 'simrat39/rust-tools.nvim'
 
 " Neovim Tree shitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-" Plug 'nvim-treesitter/playground'
+Plug 'nvim-treesitter/playground'
 
 " Themes
 Plug 'gruvbox-community/gruvbox'
@@ -274,6 +274,9 @@ nnoremap <leader>fw yiw/<C-R>"<CR>
 nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
 nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
 nnoremap <leader>nt :lua require('neotest').run.run()<CR>
+nnoremap <leader>nf :lua require("neotest").run.run(vim.fn.expand("%"))<CR>
+nnoremap <leader>no :lua require('neotest').output.open()<CR>
+nnoremap <leader>ns :lua require('neotest').summary.toggle()<CR>
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 
 " Git keymaps
@@ -320,3 +323,9 @@ nnoremap <leader>o o<ESC>
   nnoremap <M-j> <c-w>j
   nnoremap <M-k> <c-w>k
   nnoremap <M-l> <c-w>l
+
+  au User lsp_setup call lsp#register_server({
+     \ 'name': 'psalm-language-server',
+     \ 'cmd': {server_info->[expand('vendor/bin/psalm-language-server')]},
+     \ 'allowlist': ['php'],
+     \ })
