@@ -88,6 +88,7 @@ Plug 'vuciv/vim-bujo'
 " Plug 'vimwiki/vimwiki'
 Plug 'sotte/presenting.vim'
 
+Plug 'rcarriga/nvim-notify'
 
 " tpope
 Plug 'tpope/vim-fugitive'
@@ -116,6 +117,7 @@ Plug 'mxsdev/nvim-dap-vscode-js'
 
 "Test Runner
 Plug 'antoinemadec/FixCursorHold.nvim'
+Plug 'nvim-neotest/nvim-nio'
 Plug 'nvim-neotest/neotest'
 Plug 'nvim-neotest/neotest-go'
 Plug 'theutz/neotest-pest'
@@ -175,6 +177,8 @@ lua require("telescope").load_extension "file_browser"
 
 lua require("ollm")
 
+lua vim.notify = require("notify")
+
 
 " vim-markdown settings
 " disable header folding
@@ -212,6 +216,12 @@ augroup ERGHO
     autocmd BufWritePre * :call TrimWhiteSpace()
 augroup END
 
+augroup PHBSCF
+    autocmd!
+    autocmd BufWritePost,BufReadPost,InsertLeave *.php :lua require'phpcs'.cs()
+    autocmd BufWritePost *.php :lua require'phpcs'.cbf()
+augroup END
+
 " autocmd FileType php set iskeyword+=$ noet ci pi sts=0 sw=4 ts=4
 
 " PHPCS
@@ -240,6 +250,11 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 nnoremap <leader>bn <cmd>bn<cr>
 nnoremap <leader>bp <cmd>bp<cr>
+
+nnoremap <leader>nt <cmd>:lua require'neotest'.run.run()<cr>
+nnoremap <leader>nw <cmd>:lua require'neotest'.watch.toggle()<cr>
+nnoremap <leader>no <cmd>:lua require'neotest'.output.open()<cr>
+nnoremap <leader>ns <cmd>:lua require'neotest'.summary.toggle()<cr>
 
 " TODO
 nmap <C-S> <Plug>BujoAddnormal

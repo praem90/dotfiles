@@ -141,3 +141,6 @@ export PATH="${GOPATH}/bin:${PATH}"
 
 alias get_esprs='. $HOME/export-esp.sh'
 alias get_idf='. $HOME/esp/esp-idf/export.sh'
+
+
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
