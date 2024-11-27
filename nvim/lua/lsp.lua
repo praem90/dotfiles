@@ -41,7 +41,8 @@ require'lspconfig'.sqlls.setup{
 	root_dir = require'lspconfig'.util.find_git_ancestor,
 	single_file_support=true
 }
-require'lspconfig'.tsserver.setup{}
+-- require'lspconfig'.tsserver.setup{}
+require'lspconfig'.ts_ls.setup{}
 require'lspconfig'.pyright.setup{}
 require("rust-tools").setup()
 require'lspconfig'.angularls.setup{}
