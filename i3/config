@@ -42,18 +42,18 @@ bindsym $mod+z exec --no-startup-id morc_menu
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
 ################################################################################################
 
-exec --no-startup-id volumeicon
-bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
+# exec --no-startup-id volumeicon
+# bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 #exec --no-startup-id pulseaudio
 #exec --no-startup-id pa-applet
 #bindsym $mod+Ctrl+m exec pavucontrol
 
 ################################################################################################
 
-# Use pactl to adjust volume in PulseAudio.
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status && notify-send "Volume:" $(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}')
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status && notify-send "Volume:" $(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}')
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+# Use pactl to adjust volume in PulseAudio. https://github.com/praem90/pactl-ctl
+bindsym XF86AudioRaiseVolume exec --no-startup-id /home/praem90/projects/learnings/rust/volume/target/release/volume up
+bindsym XF86AudioLowerVolume exec --no-startup-id /home/praem90/projects/learnings/rust/volume/target/release/volume down
+bindsym XF86AudioMute exec --no-startup-id /home/praem90/projects/learnings/rust/volume/target/release/volume toggle
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Screen brightness controls
@@ -151,8 +151,7 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
 
-bindsym $mod+o move workspace to output primary
-bindsym $mod+x move workspace to output right
+bindsym $mod+o move workspace to output right
 
 # Workspace names
 # to display names or symbols instead of plain workspace numbers you can use
