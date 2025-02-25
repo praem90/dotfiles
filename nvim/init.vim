@@ -175,7 +175,9 @@ lua require("telescope").load_extension "file_browser"
 
 lua require("ollm")
 
-lua vim.notify = require("notify")
+lua vim.notify = require("notify").instance({render="compact", stages = "fade"})
+
+lua require("git").setup()
 
 lua require('phpstan').setup()
 
@@ -299,7 +301,6 @@ nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 
 " Git keymaps
 nnoremap <leader>gs :Git<CR>
-nnoremap <leader>gp :Dispatch git push<CR>
 
 nnoremap <Leader>ex :Ex<CR>
 
