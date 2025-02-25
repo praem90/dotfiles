@@ -6,10 +6,14 @@ require('neotest').setup({
             log_level = vim.log.levels.DEBUG,
             phpunit_cmd = "/Users/praem90/personal/packages/rust/neotest-docker-phpunit/target/debug/neotest-docker-phpunit",
             docker_phpunit = {
+                ['/Users/praem90/projects/track-core'] = {
+                    container   = "php",
+                    volume      = "/Users/praem90/projects/track-core:/var/www/track",
+                },
                 default = {
                     container = "php",
                     volume = "/Users/praem90/projects/track-payments:/app",
-                }
+                },
             }
         }),
         require("neotest-go"),

@@ -143,9 +143,12 @@ Plug 'plasticboy/vim-markdown'
 
 Plug 'phpstan/vim-phpstan'
 
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+" Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 Plug 'nomnivore/ollama.nvim'
+
+Plug 'nvzone/volt'
+Plug 'nvzone/typr'
 
 " Plug 'mtdl9/vim-log-highlighting'
 call plug#end()
@@ -153,7 +156,6 @@ call plug#end()
 " Opaque Background (Comment out to use terminal's profile)
 set termguicolors
 
-colorscheme onedark
 """ Coloring
 
 " Transparent Background (For i3 and compton)
@@ -161,8 +163,12 @@ hi Normal guibg=NONE ctermbg=NONE
 
 set background=dark
 
+colorscheme onedark
+
 " LSP settings moved to lsp.lua
 lua require('lsp')
+
+lua require('phpcs').setup({max_line_number = 0})
 
 lua require('lua-cmp')
 
@@ -176,6 +182,8 @@ lua require('debug-dap')
 lua require('test-runner')
 
 lua require('ollama').setup({ model = "codellama:7b" })
+
+lua require('typr').setup()
 
 lua << END
 require'lualine'.setup{
@@ -208,9 +216,7 @@ augroup ERGHO
     autocmd BufEnter github.com_*.txt :set filetype=markdown
 augroup END
 
-" autocmd FileType php set iskeyword+=$ noet ci pi sts=0 sw=4 ts=4
-
-let g:PHP_removeCRwhenUnix = 1
+autocmd FileType php set iskeyword+=$ noet ci pi sts=0 sw=4 ts=4
 
 
 
@@ -277,11 +283,12 @@ nnoremap <leader>nt :lua require('neotest').run.run()<CR>
 nnoremap <leader>nf :lua require("neotest").run.run(vim.fn.expand("%"))<CR>
 nnoremap <leader>no :lua require('neotest').output.open()<CR>
 nnoremap <leader>ns :lua require('neotest').summary.toggle()<CR>
+nnoremap <leader>nw :lua require('neotest').watch.toggle()<CR>
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 
 " Git keymaps
 nnoremap <leader>gs :Git<CR>
-nnoremap <leader>gp :Dispatch git push<CR>
+nnoremap <leader>gp :Git push<CR>
 
 nnoremap <Leader>ex :Ex<CR>
 
@@ -324,8 +331,3 @@ nnoremap <leader>o o<ESC>
   nnoremap <M-k> <c-w>k
   nnoremap <M-l> <c-w>l
 
-  au User lsp_setup call lsp#register_server({
-     \ 'name': 'psalm-language-server',
-     \ 'cmd': {server_info->[expand('vendor/bin/psalm-language-server')]},
-     \ 'allowlist': ['php'],
-     \ })

@@ -164,14 +164,14 @@ font:
   # spacing.
   offset:
     x: 0
-    y: 15
+    y: 16
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the
   # right, increasing `y` moves the glyph upward.
   glyph_offset:
     x: 0
-    y: 7
+    y: 8
 
   # Thin stroke font rendering (macOS only)
   #
@@ -253,7 +253,7 @@ draw_bold_text_with_bright_colors: false
 # Bell
 #
 # The bell is rung every time the BEL control character is received.
-#bell:
+bell:
   # Visual Bell Animation
   #
   # Animation effect for flashing the screen when the visual bell is rung.
@@ -269,7 +269,7 @@ draw_bold_text_with_bright_colors: false
   #   - EaseOutExpo
   #   - EaseOutCirc
   #   - Linear
-  #animation: EaseOutExpo
+  animation: EaseOutExpo
 
   # Duration of the visual bell flash in milliseconds. A `duration` of `0` will
   # disable the visual bell animation.
@@ -290,6 +290,9 @@ draw_bold_text_with_bright_colors: false
   #     args: ["Hello, World!"]
   #
   #command: None
+  command:
+    program: osascript
+    args: ['-e', 'beep']
 
 #selection:
   # This string contains all characters that are used as separators for

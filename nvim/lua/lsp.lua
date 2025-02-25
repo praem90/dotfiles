@@ -7,9 +7,14 @@ require'lspconfig'.lua_ls.setup{}
 require'lspconfig'.phpactor.setup{
     capabilities = require('cmp_nvim_lsp').default_capabilities()
 }
+
+require'lspconfig'.psalm.setup{
+    cmd = {"./vendor/bin/psalm-language-server", "-r", vim.fn.getcwd()}
+}
 require'lspconfig'.vimls.setup{}
 require'lspconfig'.html.setup{}
-require'lspconfig'.tsserver.setup{}
+-- require'lspconfig'.tsserver.setup{}
+require'lspconfig'.ts_ls.setup{}
 -- require'lspconfig'.pyright.setup{}
 require("rust-tools").setup()
 require'lspconfig'.angularls.setup{}

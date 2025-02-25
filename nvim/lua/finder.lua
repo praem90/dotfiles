@@ -1,12 +1,10 @@
 local popup = require("plenary.popup")
-local Layout = require("telescope.pickers.layout")
 local p_window = require("telescope.pickers.window")
 local finders = require("telescope.finders")
 local state = require("telescope.state")
 local builtins = require("telescope.builtin")
 local actions = require("telescope.actions")
 local make_entry = require "telescope.make_entry"
-local utils = require "telescope.utils"
 
 local M = {}
 
@@ -15,7 +13,7 @@ M.searchAll = function ()
         border = true,
         padding = {0, 0, 0, 0},
         borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-        col = 22,
+        col = 27,
         enter = true,
         height = 1,
         line = 7,
@@ -55,7 +53,6 @@ M.searchAll = function ()
                 table.insert(command, file_type)
             end
             table.insert(command, prompt)
-            print(vim.inspect(command))
             return vim.tbl_flatten(command)
         end, make_entry.gen_from_vimgrep(), nil, vim.loop.cwd()),
         get_window_options = function(picker, max_columns, max_lines)
@@ -63,6 +60,7 @@ M.searchAll = function ()
             layout_opts.results.height = layout_opts.results.height - 3
             layout_opts.results.line = 10
             layout_opts.prompt.line = 4
+            print(vim.inspect(layout_opts.prompt))
 
             return layout_opts
         end,
