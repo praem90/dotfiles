@@ -135,8 +135,6 @@ Plug 'theutz/neotest-pest'
 " Plug 'elzr/vim-json'
 Plug 'plasticboy/vim-markdown'
 
-Plug 'phpstan/vim-phpstan'
-
 Plug 'nomnivore/ollama.nvim'
 
 
@@ -178,6 +176,8 @@ lua require("telescope").load_extension "file_browser"
 lua require("ollm")
 
 lua vim.notify = require("notify")
+
+lua require('phpstan').setup()
 
 
 " vim-markdown settings
@@ -284,7 +284,7 @@ nnoremap <leader>K     <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <leader>ca     <cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <leader>gi    <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <leader><c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <leader>1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <leader>gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <leader>gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <leader>g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <leader>gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
