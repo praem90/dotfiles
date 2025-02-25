@@ -55,6 +55,7 @@ Plug 'neovim/nvim-lspconfig'
 
 " Rust
 Plug 'simrat39/rust-tools.nvim'
+" Plug 'mrcjkb/rustaceanvim'
 
 " Neovim Tree shitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -87,6 +88,7 @@ Plug 'vuciv/vim-bujo'
 " Plug 'vimwiki/vimwiki'
 Plug 'sotte/presenting.vim'
 
+Plug 'rcarriga/nvim-notify'
 
 " tpope
 Plug 'tpope/vim-fugitive'
@@ -115,7 +117,9 @@ Plug 'mxsdev/nvim-dap-vscode-js'
 
 "Test Runner
 Plug 'antoinemadec/FixCursorHold.nvim'
+Plug 'nvim-neotest/nvim-nio'
 Plug 'nvim-neotest/neotest'
+Plug 'nvim-neotest/neotest-go'
 Plug 'theutz/neotest-pest'
 
 
@@ -130,8 +134,6 @@ Plug 'theutz/neotest-pest'
 " JSON front matter highlight plugin
 " Plug 'elzr/vim-json'
 Plug 'plasticboy/vim-markdown'
-
-Plug 'phpstan/vim-phpstan'
 
 Plug 'nomnivore/ollama.nvim'
 
@@ -173,6 +175,12 @@ lua require("telescope").load_extension "file_browser"
 
 lua require("ollm")
 
+lua vim.notify = require("notify").instance({render="compact", stages = "fade"})
+
+lua require("git").setup()
+
+lua require('phpstan').setup()
+
 
 " vim-markdown settings
 " disable header folding
@@ -210,6 +218,12 @@ augroup ERGHO
     autocmd BufWritePre * :call TrimWhiteSpace()
 augroup END
 
+augroup PHBSCF
+    autocmd!
+    autocmd BufWritePost,BufReadPost,InsertLeave *.php :lua require'phpcs'.cs()
+    autocmd BufWritePost *.php :lua require'phpcs'.cbf()
+augroup END
+
 " autocmd FileType php set iskeyword+=$ noet ci pi sts=0 sw=4 ts=4
 
 " PHPCS
@@ -239,6 +253,11 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>bn <cmd>bn<cr>
 nnoremap <leader>bp <cmd>bp<cr>
 
+nnoremap <leader>nt <cmd>:lua require'neotest'.run.run()<cr>
+nnoremap <leader>nw <cmd>:lua require'neotest'.watch.toggle()<cr>
+nnoremap <leader>no <cmd>:lua require'neotest'.output.open()<cr>
+nnoremap <leader>ns <cmd>:lua require'neotest'.summary.toggle()<cr>
+
 " TODO
 nmap <C-S> <Plug>BujoAddnormal
 imap <C-S> <Plug>BujoAddinsert
@@ -267,7 +286,7 @@ nnoremap <leader>K     <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <leader>ca     <cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <leader>gi    <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <leader><c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <leader>1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <leader>gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <leader>gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <leader>g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <leader>gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
@@ -282,7 +301,6 @@ nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 
 " Git keymaps
 nnoremap <leader>gs :Git<CR>
-nnoremap <leader>gp :Dispatch git push<CR>
 
 nnoremap <Leader>ex :Ex<CR>
 

@@ -11,7 +11,7 @@
 #import:
 #  - /path/to/alacritty.yml
 import:
- - ~/.config/alacritty/themes/themes/onenord.yaml
+ - ~/.config/alacritty/nord.yml
 
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
@@ -158,7 +158,7 @@ font:
     style: Bold Italic
 
   # Point size
-  size: 10.0
+  size: 20.0
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
