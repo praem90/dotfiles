@@ -165,10 +165,6 @@ set background=dark
 
 colorscheme onedark
 
-lua vim.notify = require("notify").instance({render="compact", stages = "fade"})
-lua require('git')
-
-
 " LSP settings moved to lsp.lua
 lua require('lsp')
 
@@ -188,6 +184,9 @@ lua require('test-runner')
 lua require('ollama').setup({ model = "codellama:7b" })
 
 lua require('typr').setup()
+
+lua vim.notify = require("notify").instance({render="compact", stages = "fade"})
+lua require('git').setup()
 
 lua << END
 require'lualine'.setup{

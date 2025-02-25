@@ -1,7 +1,5 @@
 -- require'lspconfig'.intelephense.setup{}
 
-require("neodev").setup({})
-
 require'lspconfig'.lua_ls.setup{}
 
 require'lspconfig'.phpactor.setup{
@@ -13,6 +11,7 @@ require'lspconfig'.psalm.setup{
 }
 require'lspconfig'.vimls.setup{}
 require'lspconfig'.html.setup{}
+
 -- require'lspconfig'.tsserver.setup{}
 require'lspconfig'.ts_ls.setup{}
 -- require'lspconfig'.pyright.setup{}
