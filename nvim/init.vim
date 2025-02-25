@@ -127,8 +127,6 @@ Plug 'praem90/neotest-docker-phpunit.nvim'
 
 Plug 'aspeddro/slides.nvim'
 
-Plug 'folke/neodev.nvim'
-
 " Plug 'codota/tabnine-vim'
 
 " MY PHPCS and PHPCBF plugin
@@ -150,6 +148,8 @@ Plug 'nomnivore/ollama.nvim'
 Plug 'nvzone/volt'
 Plug 'nvzone/typr'
 
+Plug 'rcarriga/nvim-notify'
+
 " Plug 'mtdl9/vim-log-highlighting'
 call plug#end()
 
@@ -164,6 +164,10 @@ hi Normal guibg=NONE ctermbg=NONE
 set background=dark
 
 colorscheme onedark
+
+lua vim.notify = require("notify").instance({render="compact", stages = "fade"})
+lua require('git')
+
 
 " LSP settings moved to lsp.lua
 lua require('lsp')
@@ -288,7 +292,6 @@ nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 
 " Git keymaps
 nnoremap <leader>gs :Git<CR>
-nnoremap <leader>gp :Git push<CR>
 
 nnoremap <Leader>ex :Ex<CR>
 
