@@ -1,4 +1,6 @@
 local Job = require'plenary.job'
+local pickers = require "telescope.pickers"
+local finders = require "telescope.finders"
 
 local M = {}
 
@@ -53,10 +55,15 @@ M.fetch = function ()
     }):start()
 end
 
+M.checkout = function ()
+    require('telescope.builtin').git_branches(require'telescope.themes'.get_dropdown({title="Git Checkout", previewer=false,recurse_submodules = true, show_untracked = false}))
+end
+
 M.setup = function ()
     vim.keymap.set("n", "<leader>gp", M.push)
     vim.keymap.set("n", "<leader>gl", M.pull)
-    vim.keymap.set("n", "<leader>gch", M.fetch)
+    vim.keymap.set("n", "<leader>gc", M.checkout)
+    vim.keymap.set("n", "<leader>gf", M.fetch)
 end
 
 return M
