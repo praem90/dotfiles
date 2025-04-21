@@ -114,12 +114,14 @@ Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'mfussenegger/nvim-dap'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'mxsdev/nvim-dap-vscode-js'
+Plug 'leoluz/nvim-dap-go'
 
 "Test Runner
 Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'nvim-neotest/nvim-nio'
 Plug 'nvim-neotest/neotest'
 Plug 'nvim-neotest/neotest-go'
+Plug 'fredrikaverpil/neotest-golang'
 Plug 'theutz/neotest-pest'
 
 
@@ -162,6 +164,8 @@ lua require('lua-cmp')
 " VimSpector keybindings
 " lua require('spector')
 lua require('debug-dap')
+
+lua require('dap-go').setup()
 
 lua require('test-runner')
 
@@ -220,8 +224,8 @@ augroup END
 
 augroup PHBSCF
     autocmd!
-    autocmd BufWritePost,BufReadPost,InsertLeave *.php :lua require'phpcs'.cs()
-    autocmd BufWritePost *.php :lua require'phpcs'.cbf()
+    " autocmd BufWritePost,BufReadPost,InsertLeave *.php :lua require'phpcs'.cs()
+    " autocmd BufWritePost *.php :lua require'phpcs'.cbf()
 augroup END
 
 " autocmd FileType php set iskeyword+=$ noet ci pi sts=0 sw=4 ts=4
@@ -252,11 +256,6 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 nnoremap <leader>bn <cmd>bn<cr>
 nnoremap <leader>bp <cmd>bp<cr>
-
-nnoremap <leader>nt <cmd>:lua require'neotest'.run.run()<cr>
-nnoremap <leader>nw <cmd>:lua require'neotest'.watch.toggle()<cr>
-nnoremap <leader>no <cmd>:lua require'neotest'.output.open()<cr>
-nnoremap <leader>ns <cmd>:lua require'neotest'.summary.toggle()<cr>
 
 " TODO
 nmap <C-S> <Plug>BujoAddnormal

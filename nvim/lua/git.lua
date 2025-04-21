@@ -5,8 +5,9 @@ local M = {}
 M.title = "Git"
 
 M.push = function (opts)
+    opts = opts or {}
     opts.args = {"push"}
-    opts.messages = vim.tbl_extend('keep', {
+    opts.messages = vim.tbl_extend('force', {
         processing = "Pushing...",
         success = "Pushed",
         error = "Unable to push",
@@ -16,8 +17,9 @@ M.push = function (opts)
 end
 
 M.pull = function (opts)
+    opts = opts or {}
     opts.args = {"pull"}
-    opts.messages = vim.tbl_extend('keep', {
+    opts.messages = vim.tbl_extend('force', {
         processing = "Pulling...",
         success = "Pulled",
         error = "Unable to pull",
@@ -28,7 +30,7 @@ end
 
 M.fetch = function (opts)
     opts.args = {"fetch"}
-    opts.messages = vim.tbl_extend('keep', {
+    opts.messages = vim.tbl_extend('force', {
         processing = "Fetching...",
         success = "Fetched",
         error = "Unable to fetch",
@@ -39,8 +41,8 @@ end
 
 M.exec = function (opts)
     opts = opts or {}
-    local notify_opts = vim.tbl_extend("keep", {title = M.title }, opts.notify_opts or {})
-    notify_opts.replace = vim.notify(opts.messages.processing, vim.log.levels.INFO, notify_opts)
+    local notify_opts = vim.tbl_extend("force", {title = M.title }, opts.notify_opts or {})
+    notify_opts.replace = vim.notify(opts.messages.processing, vim.log.levels.WARN, notify_opts)
     Job:new({
         command = 'git',
         args = opts.args,
@@ -58,16 +60,9 @@ M.exec = function (opts)
 end
 
 M.setup = function (opts)
-    opts = opts or {}
-    vim.keymap.set("n", "<leader>gp", function ()
-        M.push(opts)
-    end)
-    vim.keymap.set("n", "<leader>gl", function ()
-       M.pull(opts)
-    end)
-    vim.keymap.set("n", "<leader>gch", function ()
-       M.fetch(opts)
-    end)
+    vim.keymap.set("n", "<leader>gp", M.push)
+    vim.keymap.set("n", "<leader>gl", M.pull)
+    vim.keymap.set("n", "<leader>gch", M.fetch)
 end
 
 return M

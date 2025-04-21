@@ -56,6 +56,9 @@ Job:new({
 end
 
 M.setup = function ()
+    if vim.fn.executable(vim.fn.getcwd() .. "/vendor/bin/phpstan") == 0 then
+       return
+    end
     vim.api.nvim_create_autocmd({"BufReadPre", "BufWritePost"}, {
         pattern = {"*.php"},
         callback = M.analyse

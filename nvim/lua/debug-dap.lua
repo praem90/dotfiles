@@ -25,7 +25,6 @@ function map_helper(mode, lhs, rhs, opts)
     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-
 map_helper("n", "<leader>dd", ":lua require'dap'.continue()<CR>");
 map_helper("n", "<leader>dx", ":lua require'dap'.terminate()<CR>");
 map_helper("n", "<leader>dr", ":lua require'dap'.restart()<CR>");

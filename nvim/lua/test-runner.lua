@@ -1,10 +1,12 @@
 require('neotest').setup({
     adapters = {
         require('neotest-pest'),
-        require('neotest-go'),
+        require('neotest-golang')({}),
     }
 })
 
-vim.keymap.set('n', '<leader>tu', '<Cmd>lua require("neotest").run.run()<CR>', {silent = true})
-vim.keymap.set('n', '<leader>to', '<Cmd>lua require("neotest").output.open()<CR>', {silent = true})
-vim.keymap.set('n', '<leader>ts', '<Cmd>lua require("neotest").summary.toggle()<CR>', {silent = true})
+vim.keymap.set('n', '<leader>nt', '<Cmd>lua require("neotest").run.run()<CR>', {silent = true})
+vim.keymap.set('n', '<leader>nw', '<Cmd>lua require("neotest").watch.toggle()<CR>', {silent = true})
+vim.keymap.set('n', '<leader>no', '<Cmd>lua require("neotest").output.open()<CR>', {silent = true})
+vim.keymap.set('n', '<leader>ns', '<Cmd>lua require("neotest").summary.toggle()<CR>', {silent = true})
+

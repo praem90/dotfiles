@@ -125,6 +125,9 @@ export NVM_DIR="$HOME/.config/nvm"
 
 export BROWSER="/usr/bin/brave"
 
+export JAVA_HOME=/home/praem90/Downloads/jdk-11.0.25
+export PATH="${JAVA_HOME}/bin:${PATH}"
+
 export ANDROID_HOME=/home/praem90/Android/Sdk
 export CHROME_EXECUTABLE=/bin/google-chrome-stable
 
