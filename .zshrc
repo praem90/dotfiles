@@ -147,3 +147,5 @@ alias get_idf='. $HOME/esp/esp-idf/export.sh'
 
 
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+
+eval "$(starship init zsh)"

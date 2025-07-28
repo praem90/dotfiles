@@ -103,6 +103,7 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 Plug 'hrsh7th/nvim-cmp'
 
 Plug 'hrsh7th/cmp-vsnip'
@@ -139,6 +140,7 @@ Plug 'plasticboy/vim-markdown'
 
 Plug 'nomnivore/ollama.nvim'
 
+Plug 'felpafel/inlay-hint.nvim'
 
 " Plug 'mtdl9/vim-log-highlighting'
 call plug#end()
@@ -157,6 +159,7 @@ hi Normal guibg=NONE ctermbg=NONE
 set background=dark
 
 " LSP settings moved to lsp.lua
+
 lua require('lsp')
 
 lua require('lua-cmp')
@@ -180,6 +183,8 @@ lua require("telescope").load_extension "file_browser"
 lua require("ollm")
 
 lua vim.notify = require("notify").instance({render="compact", stages = "fade"})
+
+lua require("telescope").load_extension("notify")
 
 lua require("git").setup()
 

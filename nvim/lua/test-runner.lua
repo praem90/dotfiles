@@ -1,7 +1,9 @@
 require('neotest').setup({
     adapters = {
         require('neotest-pest'),
-        require('neotest-golang')({}),
+        require('neotest-golang')({
+            runner = "gotestsum"
+        }),
     }
 })
 

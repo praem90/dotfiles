@@ -30,9 +30,11 @@ require'lspconfig'.lua_ls.setup {
   }
 }
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 -- require'lspconfig'.intelephense.setup{}
 require'lspconfig'.phpactor.setup{
+    cmd = {"/home/praem90/.vim/plugged/phpactor/bin/phpactor", "language-server"},
     capabilities = capabilities
 }
 require'lspconfig'.vimls.setup{}
@@ -42,7 +44,9 @@ require'lspconfig'.sqlls.setup{
 	single_file_support=true
 }
 -- require'lspconfig'.tsserver.setup{}
-require'lspconfig'.ts_ls.setup{}
+require'lspconfig'.ts_ls.setup{
+    capabilities = capabilities
+}
 require'lspconfig'.pyright.setup{}
 require("rust-tools").setup()
 require'lspconfig'.angularls.setup{}
@@ -58,3 +62,4 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   end
 })
 
+require('inlay-hint').setup()
